@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResuQuest</title>
+  <link rel="stylesheet" type="text/css" href="static\assets\front.css">
+</head>
+<body>
+  <div class="header">
+    <video autoplay loop muted>
+      <source src="static/assets/video2.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="navbar">
+      <div class="icon">
+        <img src="static/assets/l1.png" alt="Logo">
+      </div>
+      
+      
+  <a href="#prediction"></a>
+  <a href="#contact"></a>
+    </div>
+    
+  </div>
+  <div class="content" style="display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+    <div>
+      <h1 class="heading">Welcome to ResuQuest</h1>
+      <p class="about-text" style="text-align: justify;">
+        Prepare confidently for your next interview with our AI-Powered Interview Preparation System. This advanced tool analyzes your resume, generates personalized interview questions, and provides detailed feedback to help you improve.
+        With tailored guidance and simulated practice, it ensures you're well-prepared to make a lasting impression. Take the next step towards acing your interviews today
+      </p>
+      <button class="explore-cvmap-button" onclick="scrollToPrediction()">Explore ResuQuest</button>
+    </div>
+    <div>
+      <img src="static\assets\cv_PNG30.png" alt="Welcome Image" style="width: 600px; height: 400px; border-radius: 40px; margin-left: 200px;">
+    </div>
+  </div>
+  
+<section id = "prediction">
+  <form action="/pred" method="POST" enctype="multipart/form-data" class="prediction">
+    <div class="prediction-image">
+      <img src="static/assets/predict.jpg" alt="Prediction Image">
+    </div>
+    <div class="prediction-content">
+      <h2 class="prediction-heading">ResuQuest</h2>
+      <p class="prediction-text">
+        Unlocking a world of possibilities, ResuQuest stands as your AI-powered partner, adept at anticipating interview questions tailored to your CV. Seamlessly enhancing your preparation process, it empowers you with AI-driven insights, magnifying your readiness and instilling unwavering confidence. With the capacity to foretell interview queries, ResuQuest equips you with the strategic advantage needed to excel, ensuring you approach interviews with better preparation and domain mastery.
+      </p>
+      <button type="submit" class="prediction-button">Start with ResuQuest</button>
+    </div>
+  </form>
+</section>
+
+
+  <script>
+    function scrollToPrediction() {
+    
+      const targetSection = document.querySelector(".prediction");
+  
+      if (targetSection) {
+      
+        const offset = targetSection.offsetTop;
+  
+        window.scrollTo({
+          top: offset,
+          behavior: "smooth"
+        });
+      }
+    }
+
+    function scrollToSection(sectionId) {
+      const targetSection = document.getElementById(sectionId);
+      if (targetSection) {
+        const offset = targetSection.offsetTop;
+
+        
+        window.scrollTo({
+          top: offset,
+          behavior: "smooth"
+        });
+      }
+    }
+    document.querySelector('a[href="#prediction"]').addEventListener('click', () => scrollToSection('prediction'));
+    document.querySelector('a[href="#team"]').addEventListener('click', () => scrollToSection('team'));
+    document.querySelector('a[href="#contact"]').addEventListener('click', () => scrollToSection('contact'));
+  </script>
+  
+  
+</body>
+</html>

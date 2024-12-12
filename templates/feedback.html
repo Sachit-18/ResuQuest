@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResuQuest</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feedback-item {
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            font-size: 1.1rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .user-answer, .correct-answer {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .user-answer {
+            color: #333;
+            font-style: italic;
+        }
+
+        .correct-answer {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .result {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .correct {
+            color: #4CAF50;
+        }
+
+        .incorrect {
+            color: #f44336;
+        }
+
+        .summary {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .summary .total {
+            color: #333;
+        }
+
+        .summary .score {
+            font-size: 1.5rem;
+            color: #4CAF50;
+        }
+
+        .summary .incorrect {
+            color: #f44336;
+        }
+
+        .no-feedback {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #f44336;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if feedback %}
+            <h2>Your Feedback</h2>
+            <ul>
+                {% for item in feedback %}
+                    <li class="feedback-item">
+                        <p class="question">Question: {{ item.question }}</p>
+                        <p class="user-answer">Your Answer: <span>{{ item.user_answer }}</span></p>
+                        <p class="correct-answer">Correct Answer: <span>{{ item.correct_answer }}</span></p>
+                        <p class="result {% if item.is_correct %}correct{% else %}incorrect{% endif %}">
+                            Result: {{ 'Correct' if item.is_correct else 'Incorrect' }}
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+            
+            <div class="summary">
+                <p class="total">You answered {{ feedback|length }} questions.</p>
+                <p class="score">Correct: {{ feedback|sum(attribute='is_correct') }}</p>
+                <p class="incorrect">Incorrect: {{ feedback|length - feedback|sum(attribute='is_correct') }}</p>
+            </div>
+        {% else %}
+            <p class="no-feedback">No feedback available.</p>
+        {% endif %}
+        
+        <!-- Button to go back to questions -->
+        <a href="{{ url_for('questions') }}">
+            <button type="button">Go Back to Questions</button>
+        </a>
+    </div>
+</body>
+</html>
